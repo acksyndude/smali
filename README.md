@@ -1,4 +1,49 @@
-### Fixed Old Gradle Issue
+# Fixed Old Gradle Issue
+
+## Build Commands
+```
+# Clean and build everything
+./gradlew clean build
+
+# Build without running tests (faster)
+./gradlew clean build -x test
+
+# Build specific modules
+./gradlew :smali:build
+./gradlew :baksmali:build
+```
+
+## Running the Tools
+After building, you'll find the executable JARs in the build/libs directories:
+
+### Smali (Assembler)
+```
+# Run smali assembler
+java -jar smali/build/libs/smali-fat.jar [options] <input.smali> -o <output.dex>
+
+# Example: assemble a smali file
+java -jar smali/build/libs/smali-fat.jar HelloWorld.smali -o HelloWorld.dex
+```
+
+### Baksmali (Disassembler)
+```
+# Run baksmali disassembler
+java -jar baksmali/build/libs/baksmali-fat.jar [options] <input.dex> -o <output_directory>
+
+# Example: disassemble a dex file
+java -jar baksmali/build/libs/baksmali-fat.jar app.dex -o disassembled/
+```
+
+### Quick Test
+You can test the build with one of the example files:
+```
+# Build the project
+./gradlew clean build
+
+# Test with the HelloWorld example
+java -jar smali/build/libs/smali-fat.jar examples/HelloWorld/HelloWorld.smali -o HelloWorld.dex
+```
+
 
 ### About
 
